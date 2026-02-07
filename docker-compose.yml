@@ -1,0 +1,16 @@
+services:
+  orchestrator:
+    container_name: orchestrator
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: dema_postgres
+    image: postgres:16.3
+    restart: unless-stopped
+    volumes:
+      - database:/var/lib/postgresql/data/
+
+volumes:
+  database:
