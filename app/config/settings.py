@@ -6,8 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS = [
-    'django.contrib.staticfiles',
+INSTALLED_APPS = ['django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.redirects',
     'django.contrib.admin',
@@ -17,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'internal',
     'corsheaders',
-]
+    'videos',]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

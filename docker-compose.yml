@@ -6,11 +6,20 @@ services:
       - postgres
 
   postgres:
-    container_name: dema_postgres
+    container_name: orchestrator-postgres
     image: postgres:16.3
     restart: unless-stopped
     volumes:
       - database:/var/lib/postgresql/data/
+
+  rabbitmq:
+    container_name: orchestrator-rabbitmq
+    image: rabbitmq:3.11.17-management
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+
 
 volumes:
   database:
