@@ -29,19 +29,11 @@ echo "Applying migrations..."
 python manage.py migrate
 echo "Migrations applied"
 
-# echo "Loading fixtures..."
-# python3 manage.py loaddata **/fixtures/default/*.json
-
-# if [ "$MODE" = "development" ]; then
-#     python3 manage.py loaddata **/fixtures/dev/*.json
-# fi
-# echo "Finished loading fixtures"
-
 if [ "$MODE" != "development" ]; then
     echo "Copying default media..."
-    mkdir -p "/var/www/dema/media/"
+    mkdir -p "/var/www/orchestrator/media/"
     if [ -d "/usr/src/app/main/media/" ]; then
-        cp -a "/usr/src/app/main/media/." "/var/www/dema/media/"
+        cp -a "/usr/src/app/main/media/." "/var/www/orchestrator/media/"
     fi
     echo "Finished copying default media"
 
@@ -51,9 +43,9 @@ if [ "$MODE" != "development" ]; then
 fi
 
 echo "Starting Memcache..."
-mkdir -p "/var/run/dema"
+mkdir -p "/var/run/orchestrator"
 memcached -a 0700 -u root \
-    -s "/var/run/dema/memcached.sock" \
+    -s "/var/run/orchestrator/memcached.sock" \
     1>>"$LOGS_ROOT/memcached.log" 2>&1 &
 echo "Memcache started"
 
@@ -62,7 +54,7 @@ if [ "$MODE" = "development" ]; then
     python -m uvicorn config.asgi:application --reload --host 0.0.0.0 --port 8000
 else
     exec gunicorn "config.asgi:application" \
-        --name "dema" \
+        --name "orchestrator" \
         --bind "0.0.0.0:8000" \
         --workers "$NUM_GUNICORN_WORKERS" \
         --worker-class uvicorn.workers.UvicornWorker \

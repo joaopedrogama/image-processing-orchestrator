@@ -3,6 +3,7 @@ services:
     container_name: orchestrator
     restart: unless-stopped
     depends_on:
+      - rabbitmq
       - postgres
 
   postgres:
@@ -19,6 +20,10 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_VHOST: /
 
 
 volumes:

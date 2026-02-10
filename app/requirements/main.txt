@@ -8,3 +8,5 @@ django-cors-headers==4.6.0
 pika==1.3.2
 uvicorn==0.40.0
 psycopg[binary]==3.2.3
+whitenoise==6.11.0
+pymemcache==4.0.0
