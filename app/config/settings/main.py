@@ -1,5 +1,3 @@
-import datetime
-import logging.config
 import os
 import pathlib
 
@@ -83,10 +81,13 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'ninja_jwt',
+    'ninja_extra',
 ]
 
 LOCAL_APPS = [
     # core apps
+    'users',
     'videos',
 ]
 
@@ -138,15 +139,11 @@ CACHES = {
 }
 
 
-# Authentication - TODO: Develop a custom user model
-
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_USER_PASSWORD_FIELD = 'password'  # noqa: S105
 
 AUTH_RETRY_CACHE_KEY = 'auth-retry'
-
-AUTH_USER_ADDRESS_HEADER = 'REMOTE_ADDR'  # Used along with AUTH_RETRY_CACHE_KEY for limiting retries
 
 AUTH_RETRY_AMOUNT = 5
 

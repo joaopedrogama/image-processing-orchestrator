@@ -1,6 +1,6 @@
 import pika
 from django.apps import AppConfig
-from videos.consumers import download_zip
+from videos.consumers import consume_from_videos_processed
 import threading
 
 class VideosConfig(AppConfig):
@@ -23,7 +23,11 @@ class VideosConfig(AppConfig):
             channel.queue_declare(queue='videos_processed', durable=True)
 
             # Start consuming messages from the queue
-            channel.basic_consume(queue='videos_processed', on_message_callback=download_zip, auto_ack=True)
+            channel.basic_consume(
+                queue='videos_processed',
+                on_message_callback=consume_from_videos_processed,
+                auto_ack=True
+            )
 
             print('Waiting for messages. To exit press CTRL+C')
             channel.start_consuming()
