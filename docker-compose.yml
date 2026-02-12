@@ -59,7 +59,7 @@ services:
 
       echo 'Criando buckets...'
       # Crie quantos buckets precisar
-      mc mb local/microservies-bucket --ignore-existing || true
+      mc mb local/microservices-bucket --ignore-existing || true
 
       echo 'Buckets criados com sucesso!'
 
