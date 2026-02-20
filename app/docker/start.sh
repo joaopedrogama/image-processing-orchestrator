@@ -49,6 +49,10 @@ memcached -a 0700 -u root \
     1>>"$LOGS_ROOT/memcached.log" 2>&1 &
 echo "Memcache started"
 
+echo "Initializing buckets..."
+python manage.py initialize_buckets
+echo "Finished initializing buckets"
+
 echo "Starting Orchestrator as `whoami`"
 if [ "$MODE" = "development" ]; then
     python -m uvicorn config.asgi:application --reload --host 0.0.0.0 --port 8000

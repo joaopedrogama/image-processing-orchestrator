@@ -41,13 +41,11 @@ services:
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
-      MINIO_ACCESS_KEY: minioadmin
-      MINIO_SECRET_KEY: minioadmin
-      MINIO_STORAGE_ACCESS_KEY: minioadmin
-      MINIO_STORAGE_SECRET_KEY: minioadmin
       MINIO_BROWSER: "on"
       MINIO_SERVER_URL: "http://localhost:9000"
       MINIO_BROWSER_REDIRECT_URL: "http://localhost:9001"
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
     entrypoint: |
       /bin/sh -c "
       set -e
@@ -60,12 +58,6 @@ services:
 
       echo 'Configurando mc alias...'
       mc alias set local http://localhost:9000 minioadmin minioadmin || true
-
-      echo 'Criando buckets...'
-      # Crie quantos buckets precisar
-      mc mb local/microservices-bucket --ignore-existing || true
-
-      echo 'Buckets criados com sucesso!'
 
       # Manter o MinIO em execução
       wait \$MINIO_PID

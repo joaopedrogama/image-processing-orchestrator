@@ -27,22 +27,15 @@ EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', BASE_DIR / 'mails')
 
 # Static and media files
 
-SERVE_MEDIA = True
+# SERVE_MEDIA = True
 
-SERVE_STATIC = True
+# SERVE_STATIC = True
 
-STORAGES = {
-    'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
-    },
-    'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
-
-_security_middleware_index = MIDDLEWARE.index('django.middleware.security.SecurityMiddleware')
-MIDDLEWARE = [
-    *MIDDLEWARE[: _security_middleware_index + 1],
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    *MIDDLEWARE[_security_middleware_index + 1 :],
-]
+# STORAGES = {
+#     'default': {
+#         'BACKEND': 'django.core.files.storage.FileSystemStorage',
+#     },
+#     'staticfiles': {
+#         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+#     },
+# }

@@ -38,6 +38,7 @@ class VideoController(ControllerBase):
     def create_video(self, request, form: Form[VideoCreateSchema], video_file: File[UploadedFile]):
         video = Video.objects.create(
             name=form.name,
-            video_file=video_file.name,
+            video_file=video_file,
         )
+        # TODO: Send to rabbitmq
         return video
