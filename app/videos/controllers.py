@@ -1,7 +1,7 @@
 from datetime import datetime
 from videos.models import Video
 from django.db.models import Q
-from ninja import FilterSchema, Query, Schema
+from ninja import FilterSchema, Query, Schema, UploadedFile, File, Form
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_extra.pagination import PageNumberPaginationExtra, PaginatedResponseSchema, paginate
 from pydantic import types
@@ -14,8 +14,11 @@ class VideoController(ControllerBase):
         id: types.UUID
         name: str
         video_file: str
-        created_at: str
-        updated_at: str
+        created_at: datetime
+        updated_at: datetime
+
+    class VideoCreateSchema(Schema):
+        name: str
 
     class VideoFilterSchema(FilterSchema):
         name: str | None = None
@@ -29,3 +32,12 @@ class VideoController(ControllerBase):
     def list_videos(self, filters: VideoFilterSchema = Query(...)):
         expressions = filters.get_filter_expression()
         return Video.objects.filter(expressions)
+
+
+    @route.post('/', url_name='videos-create', response=VideoRetrieveSchema)
+    def create_video(self, request, form: Form[VideoCreateSchema], video_file: File[UploadedFile]):
+        video = Video.objects.create(
+            name=form.name,
+            video_file=video_file.name,
+        )
+        return video
