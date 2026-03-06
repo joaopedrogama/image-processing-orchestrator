@@ -1,3 +1,5 @@
+import pika
+import json
 from datetime import datetime
 from videos.models import Video
 from django.db.models import Q
@@ -40,5 +42,34 @@ class VideoController(ControllerBase):
             name=form.name,
             video_file=video_file,
         )
-        # TODO: Send to rabbitmq
+
+        try:
+
+            connection = pika.BlockingConnection(
+                    pika.ConnectionParameters(
+                        host='rabbitmq',
+                        credentials=pika.PlainCredentials('admin', 'admin'), # TODO - add to main.py and .env
+                    )
+                )
+            channel = connection.channel()
+
+            body = json.dumps({
+                'name': video.name,
+                'video_file': video.video_file.name,
+            })
+
+            channel.basic_publish(
+                exchange='',
+                routing_key='video_to_process',
+                body=body,
+                properties=pika.BasicProperties(
+                    content_type='application/json',
+                    delivery_mode=1,
+                ),
+            )
+
+            connection.close()
+        except Exception as e:
+            print(e)
+
         return video
