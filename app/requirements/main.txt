@@ -1,4 +1,4 @@
-Django==6.0.0
+Django==5.2.12
 django-ninja==1.5.3
 black==23.9.1
 isort==5.12.0
