@@ -12,5 +12,5 @@ whitenoise==6.11.0
 pymemcache==4.0.0
 django-ninja-jwt==5.4.4
 django-ninja-extra==0.31.0
-django-minio-backend==4.5.0
+django-minio-backend==3.8.1
 ruff==0.15.5
