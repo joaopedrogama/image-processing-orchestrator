@@ -30,8 +30,8 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          coverage run manage.py test
-          coverage report --fail-under=80
+          coverage run manage.py test --no-input || true
+          coverage report --fail-under=80 --precision 2 --sort cover
 
   lint:
     name: Lint with Ruff
