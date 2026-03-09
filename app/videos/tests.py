@@ -1,8 +1,9 @@
-from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import TestCase
 from ninja_extra.testing import TestClient
-from videos.models import Video
+
 from videos.controllers import VideoController
+from videos.models import Video
 
 
 class VideoControllerTest(TestCase):

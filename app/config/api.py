@@ -1,6 +1,6 @@
-from ninja_jwt.controller import NinjaJWTDefaultController
-from ninja_extra import NinjaExtraAPI
 from ninja.security import HttpBearer
+from ninja_extra import NinjaExtraAPI
+from ninja_jwt.controller import NinjaJWTDefaultController
 
 
 class GlobalAuth(HttpBearer):

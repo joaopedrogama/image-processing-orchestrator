@@ -1,9 +1,9 @@
-import pika
 import json
 from datetime import datetime
-from videos.models import Video
+
+import pika
 from django.db.models import Q
-from ninja import FilterSchema, Query, Schema, UploadedFile, File, Form
+from ninja import File, FilterSchema, Form, Query, Schema, UploadedFile
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_extra.pagination import (
     PageNumberPaginationExtra,
@@ -11,6 +11,8 @@ from ninja_extra.pagination import (
     paginate,
 )
 from pydantic import types
+
+from videos.models import Video
 
 
 @api_controller("/videos", tags=["Videos"])

@@ -1,11 +1,11 @@
-from config.settings.main import DEBUG, INSTALLED_APPS, DATABASES, MIDDLEWARE, TEMPLATES, STATIC_URL, STATICFILES_DIRS
+from config.settings.main import *
 
 DEBUG = True
 
 
 # HTTPS
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True
 

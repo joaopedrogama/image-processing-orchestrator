@@ -1,5 +1,7 @@
 import os
+import pathlib
 import re
+
 from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
@@ -24,8 +26,7 @@ class {app_name.capitalize()}Config(AppConfig):
     name = '{app_name}'
 """
         apps_py_path = os.path.join(app_name, "apps.py")
-        with open(apps_py_path, "w") as f:
-            f.write(app_config_code)
+        pathlib.Path(apps_py_path).write_text(app_config_code)
 
         self.stdout.write(f"Added AppConfig to {apps_py_path}")
         self._add_app_to_installed_apps(app_name)
@@ -37,8 +38,7 @@ class {app_name.capitalize()}Config(AppConfig):
     def _add_app_to_installed_apps(self, app_name):
         settings_file_path = os.path.join(settings.BASE_DIR, "config", "settings.py")
 
-        with open(settings_file_path, "r") as file:
-            settings_content = file.read()
+        settings_content = pathlib.Path(settings_file_path).read_text()
 
         installed_apps_match = re.search(
             r"INSTALLED_APPS\s*=\s*\[(.*?)\]", settings_content, re.DOTALL
@@ -55,8 +55,7 @@ class {app_name.capitalize()}Config(AppConfig):
                     installed_apps_content, updated_installed_apps_content
                 )
 
-                with open(settings_file_path, "w") as file:
-                    file.write(updated_settings_content)
+                pathlib.Path(settings_file_path).write_text(updated_settings_content)
 
                 self.stdout.write(
                     self.style.SUCCESS(

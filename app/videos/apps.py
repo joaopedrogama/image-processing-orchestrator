@@ -1,7 +1,9 @@
+import threading
+
 import pika
 from django.apps import AppConfig
+
 from videos.consumers import consume_from_videos_processed
-import threading
 
 
 class VideosConfig(AppConfig):

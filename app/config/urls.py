@@ -1,10 +1,11 @@
 import re
+
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, re_path
-from .api import api
 from django.views.static import serve
-from django.conf import settings
 
+from .api import api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
