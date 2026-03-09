@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          ls -la
           pip install -r /usr/src/app/requirements/development.txt
           pip install coverage
 
