@@ -8,6 +8,8 @@ MODE = os.getenv("MODE")
 
 if MODE == "development":
     from config.settings.development import *
+else:
+    from config.settings.main import *
 # elif MODE == 'production':
 #     from config.settings.production import *
 # elif MODE == 'staging':
