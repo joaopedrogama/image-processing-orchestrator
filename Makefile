@@ -1,24 +1,13 @@
 .PHONY: install install-hooks runserver lint format
 
-install:
-	pip install -r requirements.txt
-
+docker_run_base_command := docker compose exec
+container_name := orchestrator
 
 install-hooks:
 	pre-commit install
 
-
-runserver:
-	python manage.py runserver
-
 test:
-	python manage.py test
+	$(docker_run_base_command) $(container_name) python manage.py test
 
-
-lint:
-	flake8 .
-
-
-format:
-	black .
-	isort .
+run:
+	$(docker_run_base_command) $(container_name) python manage.py runserver
