@@ -1,0 +1,26 @@
+[run]
+branch=True
+source=.
+omit =
+  manage.py
+  docker/*
+  main/asgi.py
+  main/wsgi.py
+  */migrations/*
+  */settings/*
+  */tests/*
+  */apps.py
+  scripts/*
+  project_commands/*
+
+[report]
+ignore_errors=True
+skip_covered=True
+skip_empty=True
+exclude_lines=
+  raise AssertionError
+  raise NotImplementedError
+  if __name__ == .__main__.:
+
+[html]
+directory=cover
