@@ -11,6 +11,9 @@ install-hooks:
 runserver:
 	python manage.py runserver
 
+test:
+	python manage.py test
+
 
 lint:
 	flake8 .
