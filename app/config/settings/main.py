@@ -233,9 +233,9 @@ STORAGES = {
 
 # Ninja
 
-NINJA_API_TITLE = _('Rhana API')
+NINJA_API_TITLE = _('Image Processing Orchestrator API')
 
-NINJA_API_DESCRIPTION = _('Endpoint documentation for Rhana API')
+NINJA_API_DESCRIPTION = _('Endpoint documentation for Image Processing Orchestrator API')
 
 NINJA_API_DOCS_URL = '/docs'
 
