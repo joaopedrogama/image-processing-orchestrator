@@ -30,6 +30,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
+          cd app/
           coverage run manage.py test --no-input || true
           coverage report --fail-under=80 --precision 2 --sort cover
 
