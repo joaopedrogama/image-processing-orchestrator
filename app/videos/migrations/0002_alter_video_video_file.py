@@ -6,18 +6,18 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('videos', '0001_initial'),
+        ("videos", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='video',
-            name='video_file',
+            model_name="video",
+            name="video_file",
             field=models.FileField(
                 storage=django_minio_backend.models.MinioBackend(
-                    bucket_name='microservices-bucket', storage_name='default'
+                    bucket_name="microservices-bucket", storage_name="default"
                 ),
-                upload_to='videos/',
+                upload_to="videos/",
             ),
         ),
     ]

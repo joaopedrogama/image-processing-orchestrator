@@ -11,3 +11,12 @@ test:
 
 run:
 	$(docker_run_base_command) $(container_name) python manage.py runserver
+
+ruff:
+	$(docker_run_base_command) $(container_name) ruff check .
+
+fix:
+	$(docker_run_base_command) $(container_name) ruff check --fix .
+
+format:
+	$(docker_run_base_command) $(container_name) ruff format .

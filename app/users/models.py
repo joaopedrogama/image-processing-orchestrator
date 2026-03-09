@@ -9,9 +9,12 @@ class User(AbstractUser):
     display_name = models.GeneratedField(
         db_persist=True,
         expression=Coalesce(  # Use 'first_name' + 'last_name' if both are not empty, else use 'username'
-            NullIf(Trim(Concat('first_name', models.Value(' '), 'last_name')), models.Value('')),
-            'username',
+            NullIf(
+                Trim(Concat("first_name", models.Value(" "), "last_name")),
+                models.Value(""),
+            ),
+            "username",
         ),
         output_field=models.CharField(max_length=300),
-        verbose_name=('Display Name'),
+        verbose_name=("Display Name"),
     )

@@ -4,8 +4,8 @@ from ninja_extra.testing import TestClient
 from videos.models import Video
 from videos.controllers import VideoController
 
-class VideoControllerTest(TestCase):
 
+class VideoControllerTest(TestCase):
     def setUp(self):
         self.client = TestClient(VideoController)
         self.test_video = SimpleUploadedFile(
@@ -31,7 +31,6 @@ class VideoControllerTest(TestCase):
         self.assertEqual(video.name, "Test Video")
         self.assertRegex(video.video_file.name, r"^videos/test_video.*\.mp4$")
 
-
     def test_list_videos(self):
         Video.objects.create(name="Video 1", video_file="video1.mp4")
         Video.objects.create(name="Video 2", video_file="video2.mp4")
@@ -39,4 +38,4 @@ class VideoControllerTest(TestCase):
         response = self.client.get("/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['count'], 2)
+        self.assertEqual(response.json()["count"], 2)

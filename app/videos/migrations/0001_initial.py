@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Video',
+            name="Video",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.UUIDField(
                         default=uuid.uuid4,
                         editable=False,
@@ -22,14 +22,14 @@ class Migration(migrations.Migration):
                         serialize=False,
                     ),
                 ),
-                ('name', models.CharField(max_length=255)),
-                ('video_file', models.FileField(upload_to='videos/')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=255)),
+                ("video_file", models.FileField(upload_to="videos/")),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'verbose_name_plural': 'Videos',
-                'ordering': ['-created_at'],
+                "verbose_name_plural": "Videos",
+                "ordering": ["-created_at"],
             },
         ),
     ]
