@@ -1,86 +1,219 @@
 [tool.ruff]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "site-packages",
-    "venv",
-    "__init__.py",
-    "/config/*",
-    "*/migrations/*",
-    "/tests/*",
-    "manage.py",
-    "development.py",
-    "production.py",
-    "main.py",
-]
+target-version = "py313"
 
-# Same as Black.
-line-length = 88
+line-length = 120
 indent-width = 4
 
-# Assume Python 3.10
-target-version = "py310"
+exclude = [
+    ".git",
+    "__pycache__",
+    "site-packages",
+    "venv",
+    "env",
+    ".venv",
+    ".vscode",
+    ".idea",
+    "*/migrations/*",
+    'ci',
+    "manage.py",
+]
 
 [tool.ruff.lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.
-# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
-# McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F"]
-ignore = []
+preview = true
+select = [
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-commas
+    "COM",
+    # flake8-comprehensions
+    "C4",
+    # flake8-datetimez
+    "DTZ",
+    # flake8-django
+    "DJ",
+    # flake8-errmsg
+    "EM",
+    # flake8-gettext
+    "INT",
+    # flake8-implicit-str-concat
+    "ISC",
+    # flake8-import-conventions
+    "ICN",
+    # flake8-logging
+    "LOG",
+    # flake8-logging-format
+    "G",
+    # flake8-no-pep420
+    "INP",
+    # flake8-pie
+    "PIE",
+    # flake8-print
+    "T201",
+    # flake8-pyi
+    "PYI",
+    # flake8-quotes
+    "Q",
+    # flake8-return
+    "RET",
+    # flake8-simplify
+    "SIM",
+    # flake8-tidy-imports
+    "TID",
+    # flake8-type-checking
+    "TC",
+    # flake8-use-pathlib
+    "PTH",
 
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
-unfixable = []
+    # isort
+    "I",
 
-# Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+    # pep8-naming
+    "N",
+
+    # Perflint
+    "PERF",
+
+    # pycodestyle
+    "E", # Errors
+    "W", # Warnings
+
+    # pydoclint
+    "DOC",
+
+    # pydocstyle
+    "D",
+
+    # pyflakes
+    "F",
+
+    # pygrep-hooks
+    "PGH",
+
+    # pylint
+    "PL",
+
+    # pyupgrade
+    "UP",
+
+    # refurb
+    "FURB",
+
+    # Ruff-specific rules
+    "RUF",
+
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # no-self-use
+    # The rule says:
+    # Unused self parameters are usually a sign of a method that
+    # could be replaced by a function, class method, or static method.
+    # TODO: verify if we should adapt to this
+    "PLR6301",
+
+    # reimplemented-operator
+    # I personally like the explicit lambda syntax
+    # TODO: check if we should start using it
+    # automatic fix is only available sometimes
+    # and the rule itself is in preview (unstable)
+    "FURB118",
+
+    # mutable-class-default
+    # In a Django project, it's common to have Meta classes that are mutable
+    # and it's not a big deal, but it's a bit annoying to have to write the ignores everytime
+    "RUF012",
+
+    # pydocstyle
+    # Mostly conventions that are not relevant to us/this project
+    "D100",  # undocumented-public-module
+    "D101",  # undocumented-public-class
+    "D102",  # undocumented-public-method
+    "D105",  # undocumented-magic-method  <-- Important but has 'false positives' in a Django project
+    "D106",  # undocumented-public-nested-class  <-- Important but has 'false positives' in a Django project
+    "D203",  # incorrect-blank-line-before-class
+    "D212",  # multi-line-summary-first-line
+
+    # Formatter Conflicts
+    "COM812",  # missing-trailing-comma
+]
+unfixable = [
+    # suppressible-exception
+    # The method contextlib.suppress is slower than using try-except-pass directly
+    # thus the autofix might be unwanted
+    "SIM105",
+
+    # unused-loop-control-variable
+    # It's worth manually checking why there's a unused variable
+    # autofix only renames the variable to a unused one
+    "B007",
+
+    # print/pprint found
+    # I think it's a good idea to fix this ourselves manually
+    # Note: this is an unsafe fix according to the docs
+    "T201",
+    "T203",
+
+    # single-item-membership-test
+    # This makes sense, but it's worth checking instead of autofixing
+    "FURB171",
+
+    # parenthesize-chained-operators
+    # Since this can be confusing, I think it's better doing it manually than autofixing
+    "RUF021",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    # unused-import
+    # Most of the time, the __init__.py files contain imports that are actually doing something
+    # e.g. For Django signals
+    "F401",
+]
+"**/models.py" = [
+    # pydocstyle
+    # The models.py files contain methods and nested classes
+    # that are 'obvious' and don't need to be documented
+    # "D105",  # undocumented-magic-method
+    # "D106",  # undocumented-public-nested-class
+    # But we can't ignore them since there are some that still need documentation
+    # It would be nice to have a way to ignore specific methods/classes
+    # For now, do inline ignores
+    # See: https://github.com/astral-sh/ruff/issues/7401
+]
+"**/settings/*" = [
+    # undefined-local-with-import-star
+    # As a convention, we divide settings into different files for each environment
+    # Using a wildcard import makes things cleaner and easier to manage
+    # May need to consider using a third-party lib to manage this and avoid the ignore
+    "F403",
+
+    # undefined-local-with-import-star-usage
+    # Same reason as above
+    "F405",
+]
+"**/controllers.py" = [
+    # function-call-in-default-argument
+    # This is mostly a false positive due to how Django Ninja works with type annotations
+    # e.g. https://django-ninja.dev/guides/input/filtering
+    "B008",
+]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+split-on-trailing-comma = false
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
-
-# Like Black, indent with spaces, rather than tabs.
+quote-style = "single"
 indent-style = "space"
-
-# Like Black, respect magic trailing commas.
 skip-magic-trailing-comma = false
-
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
-
-# Enable auto-formatting of code examples in docstrings. Markdown,
-# reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
-docstring-code-format = false
-
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
-docstring-code-line-length = "dynamic"
