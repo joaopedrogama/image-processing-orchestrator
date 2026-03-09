@@ -1,4 +1,4 @@
-from config.settings.main import *
+from config.settings.main import DEBUG, INSTALLED_APPS, DATABASES, MIDDLEWARE, TEMPLATES, STATIC_URL, STATICFILES_DIRS
 
 DEBUG = True
 
