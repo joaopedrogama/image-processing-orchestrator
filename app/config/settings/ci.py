@@ -1,6 +1,7 @@
 from config.settings.main import *
 
 DEBUG = True
+MODE_CI = True
 
 
 # HTTPS
