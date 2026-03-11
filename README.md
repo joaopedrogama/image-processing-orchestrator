@@ -47,4 +47,6 @@ Consulte o `Makefile` para detalhes adicionais sobre cada comando.
 
 ## Arquitetura do Projeto
 
-Este repositório contém um diagrama de arquitetura que ilustra a estrutura e o fluxo de dados do sistema. O diagrama está localizado em ![Arquitetura do Projeto](docs/arquitetura.png)
+Este repositório contém um diagrama de arquitetura que ilustra a estrutura e o fluxo de dados do sistema.
+
+[Arquitetura do Projeto](docs/arquitetura.png)
