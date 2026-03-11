@@ -1,39 +1,50 @@
-# Getting Started
+# Image Processing Orchestrator
 
-1. **Install dependencies**:
+## Sobre o Projeto
 
-   ```bash
-   make install
-   ```
+O **Image Processing Orchestrator** é a api principal do projeto no qual contém mais um microserviço que é responsável por processar imagens e retornar uma resposta com o resultado da operação além de um microserviço responsável por notificar o usuário.
 
-2. **Run the development server**:
+Neste projeto é onde o usuário irá interagir com o sistema, enviando imagens para o serviço de processamento e recebendo respostas de sucesso ou falha.
 
-   ```bash
-   make runserver
-   ```
+## Comandos Básicos
 
-3. **Install pre-commit hooks** (optional):
+Este projeto utiliza um `Makefile` para facilitar a execução de tarefas comuns. Abaixo estão os comandos disponíveis:
 
-   ```bash
-   make install-hooks
-   ```
+### Execução
 
-4. **Lint the code** (optional):
+```bash
+make install-hooks  # Instala os hooks de pré-commit para garantir a qualidade do código
+make test           # Executa os testes da aplicação
+make run            # Inicia o servidor de desenvolvimento
+make ruff           # Verifica o código com o linter Ruff
+make fix            # Corrige problemas detectados pelo linter Ruff
+make format         # Formata o código automaticamente com o Ruff
+```
 
-   ```bash
-   make lint
-   ```
+### Exemplo de Uso
 
-5. **Format the code** (optional):
-   ```bash
-   make format
-   ```
+Para iniciar o projeto, execute:
 
-## Features
+```bash
+make install-hooks
+make run
+```
 
-- Django project with pre-configured Black, isort, Flake8, and pre-commit hooks.
-- Ready-to-use template for your projects.
+Para executar os testes:
 
-## Create a new django project
+```bash
+make test
+```
 
-`django-admin startproject config . --template=../django-boot --name manage.py`
+Para verificar e corrigir problemas no código:
+
+```bash
+make ruff
+make fix
+```
+
+Consulte o `Makefile` para detalhes adicionais sobre cada comando.
+
+## Arquitetura do Projeto
+
+Este repositório contém um diagrama de arquitetura que ilustra a estrutura e o fluxo de dados do sistema. O diagrama está localizado em ![Arquitetura do Projeto](docs/arquitetura.png)
