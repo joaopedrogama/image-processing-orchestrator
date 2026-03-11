@@ -215,7 +215,7 @@ STORAGES = {
             'MINIO_SECRET_KEY': 'minioadmin',
             'MINIO_USE_HTTPS': False,
             'MINIO_REGION': 'us-east-1',
-            'MINIO_PRIVATE_BUCKETS': ['microservices-bucket'],
+            'MINIO_PRIVATE_BUCKETS': [],
             'MINIO_PUBLIC_BUCKETS': ['microservices-bucket'],
             'MINIO_URL_EXPIRY_HOURS': timedelta(days=1),  # Default is 7 days (longest) if not defined
             'MINIO_CONSISTENCY_CHECK_ON_START': False,
