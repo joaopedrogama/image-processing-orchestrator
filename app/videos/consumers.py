@@ -11,9 +11,8 @@ def consume_from_videos_processed(channel, method, properties, body):
     print("Decoded body:", body_json)
 
     try:
-        Video.objects.create(
-            name=body_json["name"],
-            video_file=body_json.get("video_file", None),
-        )
+        video_to_update = Video.objects.get(id=body_json["video_id"])
+        video_to_update.zip_video_file=body_json.get("zip_url", None)
+        video_to_update.save()
     except Exception as e:
         print(e)

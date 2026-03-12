@@ -21,6 +21,7 @@ class VideoController(ControllerBase):
         id: types.UUID
         name: str
         video_file: str
+        zip_video_file: str | None = None
         created_at: datetime
         updated_at: datetime
 
@@ -66,6 +67,7 @@ class VideoController(ControllerBase):
 
             body = json.dumps(
                 {
+                    "id": str(video.id),
                     "name": video.name,
                     "video_file": video.video_file.name,
                 }
