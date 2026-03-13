@@ -14,3 +14,4 @@ django-ninja-jwt==5.4.4
 django-ninja-extra==0.31.0
 django-minio-backend==3.8.1
 ruff==0.15.5
+coverage==7.10.1
