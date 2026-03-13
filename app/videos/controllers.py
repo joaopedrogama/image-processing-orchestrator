@@ -22,6 +22,7 @@ class VideoController(ControllerBase):
         name: str
         video_file: str
         zip_video_file: str | None = None
+        status: str
         created_at: datetime
         updated_at: datetime
 

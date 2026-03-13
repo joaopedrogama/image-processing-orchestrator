@@ -12,6 +12,15 @@ class Video(models.Model):
     zip_video_file = models.FileField(
         upload_to="videos-processed/", storage=get_public_storage(), null=True, blank=True
     )
+    status = models.CharField(
+        max_length=255,
+        default="pending",
+        choices=(
+            ("pending", "Pending"),
+            ("done", "Done"),
+            ("error", "Error"),
+        )
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
