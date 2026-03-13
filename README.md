@@ -19,6 +19,7 @@ make run            # Inicia o servidor de desenvolvimento
 make ruff           # Verifica o código com o linter Ruff
 make fix            # Corrige problemas detectados pelo linter Ruff
 make format         # Formata o código automaticamente com o Ruff
+make coverage       # Gera uma cobertura de testes
 ```
 
 ### Exemplo de Uso
